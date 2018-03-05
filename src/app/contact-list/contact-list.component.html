@@ -1,0 +1,15 @@
+<div style="text-align:center">
+  <h2 style="color: white">Contacts:</h2>
+  <form>
+    <input placeholder="Add a new contact" [(ngModel)]="contactName" name="contact">
+    <button (click)="addContact(this.contactName)">Add</button>
+  </form>
+  <button style="margin-top: 10px" (click)="undo()">Undo</button> 
+  <button style="margin-top: 10px" (click)="redo()">Redo</button>
+  <app-contact 
+    *ngFor="let contact of contacts; let i=index" [i]="i" 
+    [contact]="contact" 
+    [contacts]="contacts" 
+    (delete)="deleteContact($event)">  
+    </app-contact>
+</div>
