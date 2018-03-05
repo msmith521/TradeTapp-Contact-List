@@ -23,11 +23,12 @@ export class ContactListComponent implements OnInit {
 
   addContact(name, index, context) {
     if (index || index === 0) {
+      // check if contact needs to be added back into specific place from an 'undo'
       this.contacts.splice(index, 0, name)
     } else {
       this.contacts.push(name)
     }
-   
+    // Temperary contact created to pass as argument to deleteContact
     let tempContact= {
       contact: name,
       i: !isNaN(index) ? index : this.contacts.length-1
