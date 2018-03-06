@@ -39,6 +39,7 @@ export class ContactListComponent implements OnInit {
       if (context === 'from redo') {
         this.addUndo(this.deleteContact, tempContact)  
       } else {
+        // new action and we should clear the redo list
         this.addUndo(this.deleteContact, tempContact)
         this.redoList = [];
       } 
@@ -56,8 +57,9 @@ export class ContactListComponent implements OnInit {
         this.addUndo(this.addContact, [contact.contact, contact.i])
         
       } else {
+        // new action and we should clear the redo list
         this.addUndo(this.addContact, [contact.contact, contact.i])
-        this.redoList=[];
+        this.redoList = [];
     }
       }
       
