@@ -36,20 +36,31 @@ export class ContactListComponent implements OnInit {
     if (context === 'from undo') {
       this.addRedo(this.deleteContact, tempContact)
     } else {
-      this.addUndo(this.deleteContact, tempContact)
+      if (context === 'from redo') {
+        this.addUndo(this.deleteContact, tempContact)  
+      } else {
+        this.addUndo(this.deleteContact, tempContact)
+        this.redoList = [];
+      } 
     }
-    
     this.contactName = ''
   }
 
   deleteContact(contact, context) {
     this.contacts.splice(contact.i, 1)
 
-    if (context !== 'from undo') {
-      this.addUndo(this.addContact, [contact.contact, contact.i])
-    } else {
+    if (context === 'from undo') {
       this.addRedo(this.addContact, [contact.contact, contact.i])
+    } else {
+      if (context === 'from redo') {
+        this.addUndo(this.addContact, [contact.contact, contact.i])
+        
+      } else {
+        this.addUndo(this.addContact, [contact.contact, contact.i])
+        this.redoList=[];
     }
+      }
+      
   }
 
   undo() {
@@ -65,7 +76,7 @@ export class ContactListComponent implements OnInit {
   redo() {
     if (this.redoList.length > 0) {
       let newestRedo = this.redoList[this.redoList.length-1]
-      newestRedo[0].call(this, ...newestRedo[1])
+      newestRedo[0].call(this, ...newestRedo[1], 'from redo')
       this.redoList.pop()
     } else {
       return
