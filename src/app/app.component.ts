@@ -8,4 +8,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = "Matt's awesome contact list";
   contacts = ['Rick', 'Beth', 'Jerry','Summer', 'Morty'] 
+
+   
+//   addContact(name) {
+//   console.log('adding ', name)
+//   this.contacts.push(name);
+// }
+  
 }

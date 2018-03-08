@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { AppComponent } from '../app.component';
+
 
 @Component({
   selector: 'app-contact-list',
@@ -8,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ContactListComponent implements OnInit {
 
-  @Input() contacts: Array<any>;
+  @Input() contacts: Array<any> = []
   @Input() contactName: string = '';
   undoList = []
   redoList= []
@@ -39,7 +41,7 @@ export class ContactListComponent implements OnInit {
       if (context === 'from redo') {
         this.addUndo(this.deleteContact, tempContact)  
       } else {
-        // new action and we should clear the redo list
+        // new action and we should clear the redo lists
         this.addUndo(this.deleteContact, tempContact)
         this.redoList = [];
       } 
